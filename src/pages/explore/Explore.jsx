@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './explore.module.scss';
+import './Explore.styles.scss';
 
 const Explore = () => {
   return <div>Explore</div>;

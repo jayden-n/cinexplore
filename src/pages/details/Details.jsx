@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './details.module.scss';
+import './Details.styles.scss';
 
 const Details = () => {
   return <div>Details</div>;

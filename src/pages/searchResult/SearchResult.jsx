@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './searchresult.module.scss';
+import './SearchResult.styles.scss';
 
 const SearchResult = () => {
   return <div>SearchResult</div>;
