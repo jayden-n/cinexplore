@@ -18,7 +18,7 @@ const HeroBanner = () => {
   const { url } = useSelector((state) => state.home);
   const { data, loading } = useFetch('/movie/upcoming');
 
-  // Setting random bg images
+  // Setting "random" bg images
   useEffect(() => {
     const bg =
       url.backdrop +
