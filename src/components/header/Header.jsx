@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { SlMenu } from 'react-icons/sl';
 import { VscChromeClose } from 'react-icons/vsc';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import './Header.styles.scss';
 
 import ContentWrapper from '../contentWrapper/ContentWrapper';
 
 const Header = () => {
+  // states
   const [show, setShow] = useState('top');
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -17,6 +18,33 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  // scroll down & heading bar interaction logic
+  const controlNavbar = () => {
+    console.log(window.scrollY);
+    if (window.scrollY > 200) {
+      if (window.scrollY > lastScrollY && !mobileMenu) {
+        setShow('hide');
+      } else {
+        setShow('show');
+      }
+    } else {
+      setShow('top');
+    }
+    setLastScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', controlNavbar);
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY]);
+
+  // open/close modal logic
   const openSearch = () => {
     setMobileMenu(false);
     setShowSearch(true);
@@ -44,7 +72,7 @@ const Header = () => {
       navigate(`/search/${query}`);
       setTimeout(() => {
         setShowSearch(false);
-      }, 1000);
+      }, 0);
     }
   };
 
@@ -52,9 +80,9 @@ const Header = () => {
     <header className={`header ${mobileMenu ? 'mobileView' : ''} ${show}`}>
       <ContentWrapper>
         <div className="logo">
-          <a href="/" style={{ textDecoration: 'none' }}>
+          <Link to="/" style={{ textDecoration: 'none' }}>
             <p>StreamFlix</p>
-          </a>
+          </Link>
         </div>
         <ul className="menuItems">
           <li
