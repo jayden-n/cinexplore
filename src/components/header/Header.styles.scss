@@ -1,0 +1,19 @@
+.logo {
+  p {
+    font-size: 30px;
+    font-weight: 700;
+    background: linear-gradient(
+      to right,
+      #f89e00,
+      #da2f68,
+      #da2f68,
+      #da2f68,
+      #da2f68,
+      #da2f68,
+      #da2f68
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 10px;
+  }
+}
