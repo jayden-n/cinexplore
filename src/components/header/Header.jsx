@@ -118,6 +118,7 @@ const Header = () => {
           )}
         </div>
       </ContentWrapper>
+
       {/*Conditional search input*/}
       {showSearch && (
         <div className="searchBar">
