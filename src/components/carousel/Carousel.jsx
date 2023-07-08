@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 
+import Genres from '../genres/Genres';
 import ContentWrapper from '../contentWrapper/ContentWrapper';
 import Img from '../lazyLoadImage/Img';
 import PosterFallback from '../../assets/no-poster.png';
@@ -80,6 +81,8 @@ const Carousel = ({ data, loading, endpoint, title }) => {
                     <Img src={posterUrl} />
                     {/* Movie Rating  */}
                     <CircleRating rating={item.vote_average.toFixed(1)} />
+                    {/* Movie Genres  */}
+                    <Genres data={item.genre_ids.slice(0, 2)} />
                   </div>
                   <div className="textBlock">
                     {/* Retrieving movie names */}
