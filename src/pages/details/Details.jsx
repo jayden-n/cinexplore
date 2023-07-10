@@ -4,13 +4,15 @@ import './Details.styles.scss';
 import { useParams } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
 
-const Details = () => {
-  // // retrieves route parameter (useParams)
-  // const { mediaType, id } = useParams();
+// Components
+import DetailsBanner from './detailsBanner/DetailsBanner';
 
-  // // Choose mediaType vs endPoint from carousel
-  // const { data, loading } = useFetch(`/${mediaType}/${id}`);
-  return <div>Details</div>;
+const Details = () => {
+  return (
+    <div>
+      <DetailsBanner />
+    </div>
+  );
 };
 
 export default Details;

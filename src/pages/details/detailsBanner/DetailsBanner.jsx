@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 
-import './style.scss';
+import './DetailsBanner.styles.scss';
 
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper';
 import useFetch from '../../../hooks/useFetch';
@@ -13,6 +13,14 @@ import Img from '../../../components/lazyLoadImage/Img.jsx';
 import PosterFallback from '../../../assets/no-poster.png';
 
 const DetailsBanner = ({ video, crew }) => {
+  // retrieves route parameter (useParams)
+  const { mediaType, id } = useParams();
+
+  // Choose mediaType vs endPoint from carousel
+  const { data, loading } = useFetch(`/${mediaType}/${id}`);
+
+  const { url } = useSelector((state) => state.home);
+
   const toHoursAndMinutes = (totalMinutes) => {
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
