@@ -25,6 +25,7 @@ const Cast = ({ data, loading }) => {
         <div className="sectionHeading">Top Cast</div>
         {!loading ? (
           <div className="listItems">
+            {/* Map over api data */}
             {data?.map((item) => {
               let imgUrl = item.profile_path
                 ? url.profile + item.profile_path
