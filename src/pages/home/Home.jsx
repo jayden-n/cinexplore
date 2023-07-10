@@ -1,5 +1,6 @@
-import React from 'react';
 import './Home.styles.scss';
+
+// Components
 import HeroBanner from './heroBanner/HeroBanner';
 import Trending from './trending/Trending';
 import Popular from './popular/Popular';
@@ -12,7 +13,6 @@ const Home = () => {
       <Trending />
       <Popular />
       <TopRated />
-      <div style={{ height: 1000 }}></div>
     </div>
   );
 };
