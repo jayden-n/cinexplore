@@ -20,7 +20,7 @@ const Carousel = ({ data, loading, endpoint, title }) => {
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
 
-  // FIX: navigation clicks thru arrows
+  // FIX: navigation thru arrow clicks
   const navigation = (dir) => {
     const container = carouselContainer.current;
 

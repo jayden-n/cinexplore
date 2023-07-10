@@ -12,12 +12,12 @@
   }
   .arrow {
     font-size: 30px;
-    color: black;
+    color: #f89e00;
     position: absolute;
     top: 44%;
     transform: translateY(-50%);
     cursor: pointer;
-    opacity: 0.5;
+    // opacity: 0.5;
     z-index: 1;
     display: none;
     @include md {
