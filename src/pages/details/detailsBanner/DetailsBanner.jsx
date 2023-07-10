@@ -11,6 +11,7 @@ import Genres from '../../../components/genres/Genres';
 import CircleRating from '../../../components/circleRating/CircleRating';
 import Img from '../../../components/lazyLoadImage/Img.jsx';
 import PosterFallback from '../../../assets/no-poster.png';
+import { PlayBtn } from '../PlayBtn';
 
 const DetailsBanner = ({ video, crew }) => {
   // retrieves route parameter (useParams)
@@ -20,6 +21,8 @@ const DetailsBanner = ({ video, crew }) => {
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
 
   const { url } = useSelector((state) => state.home);
+
+  const _genres = data?.genres.map((g) => g.id);
 
   const toHoursAndMinutes = (totalMinutes) => {
     const hours = Math.floor(totalMinutes / 60);
@@ -56,6 +59,19 @@ const DetailsBanner = ({ video, crew }) => {
                     <div className="title">{`${
                       data.name || data.title
                     } (${dayjs(data.release_date).format('YYYY')})`}</div>
+
+                    {/* short movie desc & genres */}
+                    <div className="subTitle">{data.tagline}</div>
+                    <Genres data={_genres} />
+
+                    {/* Movie rating points & play movie button */}
+                    <div className="row">
+                      <CircleRating rating={data.vote_average.toFixed(1)} />
+                      <div className="playbtn">
+                        <PlayBtn />
+                        <span className="text">Watch Trailer!</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </ContentWrapper>
