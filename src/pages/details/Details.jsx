@@ -8,9 +8,18 @@ import useFetch from '../../hooks/useFetch';
 import DetailsBanner from './detailsBanner/DetailsBanner';
 
 const Details = () => {
+  // retrieves route parameter (useParams)
+  const { mediaType, id } = useParams();
+
+  // Choose mediaType vs endPoint from carousel
+  const { data, loading } = useFetch(`/${mediaType}/${id}/videos`);
+  const { data: credits, loading: creditsLoading } = useFetch(
+    `/${mediaType}/${id}/credits`
+  );
+
   return (
     <div>
-      <DetailsBanner />
+      <DetailsBanner video={data?.results?.[0]} crew={credits?.crew} />
     </div>
   );
 };

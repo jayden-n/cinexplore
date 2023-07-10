@@ -15,7 +15,7 @@ import CircleRating from '../circleRating/CircleRating';
 
 import './Carousel.styles.scss';
 
-const Carousel = ({ data, loading, endpoint, title }) => {
+const Carousel = ({ data, loading, endPoint, title }) => {
   const carouselContainer = useRef();
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ const Carousel = ({ data, loading, endpoint, title }) => {
                   className="carouselItem"
                   // send users to the details page
                   onClick={() =>
-                    navigate(`/${item.media_type || endpoint}/${item.id}`)
+                    navigate(`/${item.media_type || endPoint}/${item.id}`)
                   }
                 >
                   <div className="posterBlock">
