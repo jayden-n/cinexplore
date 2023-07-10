@@ -51,7 +51,12 @@ const DetailsBanner = ({ video, crew }) => {
                       <Img src={PosterFallback} className="posterImg" />
                     )}
                   </div>
-                  <div className="right"></div>
+                  <div className="right">
+                    {/* Movie title & released time (YYYY) */}
+                    <div className="title">{`${
+                      data.name || data.title
+                    } (${dayjs(data.release_date).format('YYYY')})`}</div>
+                  </div>
                 </div>
               </ContentWrapper>
             </Fragment>
