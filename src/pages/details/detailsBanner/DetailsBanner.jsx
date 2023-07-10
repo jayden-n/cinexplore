@@ -26,7 +26,7 @@ const DetailsBanner = ({ video, crew }) => {
 
   const { url } = useSelector((state) => state.home);
 
-  const _genres = data?.genres.map((g) => g.id);
+  const _genres = data?.genres?.map((g) => g.id);
 
   const director = crew?.filter((f) => f.job === 'Director');
   const writer = crew?.filter(
