@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import dayjs from 'dayjs';
@@ -30,7 +30,33 @@ const DetailsBanner = ({ video, crew }) => {
   return (
     <div className="detailsBanner">
       {!loading ? (
-        <div>Details Content...</div>
+        <>
+          {data && (
+            <Fragment>
+              <div className="backdrop-img">
+                {/* Add backdrop image */}
+                <Img src={url.backdrop + data.backdrop_path} />
+              </div>
+              <div className="opacity-layer"></div>
+              <ContentWrapper>
+                <div className="content">
+                  <div className="left">
+                    {data.poster_path ? (
+                      <Img
+                        src={url.backdrop + data.poster_path}
+                        className="posterImg"
+                      />
+                    ) : (
+                      // cannot find
+                      <Img src={PosterFallback} className="posterImg" />
+                    )}
+                  </div>
+                  <div className="right"></div>
+                </div>
+              </ContentWrapper>
+            </Fragment>
+          )}
+        </>
       ) : (
         <div className="detailsBannerSkeleton">
           <ContentWrapper>
