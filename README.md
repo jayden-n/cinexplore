@@ -1,5 +1,5 @@
-# Streamflix 🍿
-Streamflix is a movies collection website that helps online users search and explore their desired movies, TV Shows, Cast and more!
+# Cinexplore 🍿
+Cinexplore is a movies collection website that helps online users search and explore their desired movies, TV Shows, Cast and more!
 
 ## Technologies - Frameworks - Libraries
 
