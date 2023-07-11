@@ -5,8 +5,10 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { fetchDataFromApi } from '../../utils/api';
 import ContentWrapper from '../../components/contentWrapper/ContentWrapper';
+
 import Spinner from '../../components/spinner/Spinner';
 import noResults from '../../assets/no-results.png';
+import MovieCard from '../../components/movieCard/MovieCard';
 
 const SearchResult = () => {
   const [data, setData] = useState(null);
@@ -14,6 +16,7 @@ const SearchResult = () => {
   const [loading, setLoading] = useState(false);
   const { query } = useParams();
 
+  // next page scroll
   const fetchInitialData = () => {
     setLoading(true);
     fetchDataFromApi(`/search/multi?query=${query}&page=${pageNum}`).then(
@@ -57,10 +60,28 @@ const SearchResult = () => {
                   data.total_results > 1 ? 'results' : 'result'
                 } of '${query}'`}
               </div>
+
+              {/* Infinite Scroll */}
+              <InfiniteScroll
+                className="content"
+                dataLength={data?.results?.length || []}
+                next={fetchNextPageData}
+                hasMore={pageNum <= data?.total_pages}
+                loader={<Spinner />}
+              >
+                {data.results.map((item, index) => {
+                  {
+                    if (item.mediaType === 'person') return;
+                    return (
+                      <MovieCard key={index} data={item} fromSearch={true} />
+                    );
+                  }
+                })}
+              </InfiniteScroll>
             </>
           ) : (
             <span className="resultNotFound">
-              Sorry, there is no result for &apos;${query}&apos;
+              Sorry, there is no result for &apos;{query}&apos;
             </span>
           )}
         </ContentWrapper>
