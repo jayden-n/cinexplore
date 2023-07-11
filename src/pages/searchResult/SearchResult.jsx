@@ -1,14 +1,13 @@
-import './SearchResult.styles.scss';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+import './SearchResult.styles.scss';
+
 import { fetchDataFromApi } from '../../utils/api';
 import ContentWrapper from '../../components/contentWrapper/ContentWrapper';
-
-import Spinner from '../../components/spinner/Spinner';
-import noResults from '../../assets/no-results.png';
 import MovieCard from '../../components/movieCard/MovieCard';
+import Spinner from '../../components/spinner/Spinner';
 
 const SearchResult = () => {
   const [data, setData] = useState(null);
@@ -16,7 +15,6 @@ const SearchResult = () => {
   const [loading, setLoading] = useState(false);
   const { query } = useParams();
 
-  // next page scroll
   const fetchInitialData = () => {
     setLoading(true);
     fetchDataFromApi(`/search/multi?query=${query}&page=${pageNum}`).then(
@@ -31,10 +29,10 @@ const SearchResult = () => {
   const fetchNextPageData = () => {
     fetchDataFromApi(`/search/multi?query=${query}&page=${pageNum}`).then(
       (res) => {
-        if (data?.result) {
+        if (data?.results) {
           setData({
             ...data,
-            result: [...data?.results, ...res.results],
+            results: [...data?.results, ...res.results],
           });
         } else {
           setData(res);
@@ -45,6 +43,7 @@ const SearchResult = () => {
   };
 
   useEffect(() => {
+    setPageNum(1);
     fetchInitialData();
   }, [query]);
 
@@ -53,15 +52,16 @@ const SearchResult = () => {
       {loading && <Spinner initial={true} />}
       {!loading && (
         <ContentWrapper>
-          {data?.results.length > 0 ? (
+          {data?.results?.length > 0 ? (
             <>
               <div className="pageTitle">
                 {`Search ${
-                  data.total_results > 1 ? 'results' : 'result'
+                  data?.total_results > 1 ? 'results' : 'result'
                 } of '${query}'`}
               </div>
 
               {/* Infinite Scroll */}
+
               <InfiniteScroll
                 className="content"
                 dataLength={data?.results?.length || []}
@@ -69,19 +69,17 @@ const SearchResult = () => {
                 hasMore={pageNum <= data?.total_pages}
                 loader={<Spinner />}
               >
-                {data.results.map((item, index) => {
-                  {
-                    if (item.mediaType === 'person') return;
-                    return (
-                      <MovieCard key={index} data={item} fromSearch={true} />
-                    );
-                  }
+                {data?.results.map((item, index) => {
+                  if (item.media_type === 'person') return;
+                  return (
+                    <MovieCard key={index} data={item} fromSearch={true} />
+                  );
                 })}
               </InfiniteScroll>
             </>
           ) : (
             <span className="resultNotFound">
-              Sorry, there is no result for &apos;{query}&apos;
+              Sorry, there is no results for &apos;{query}&apos;
             </span>
           )}
         </ContentWrapper>
