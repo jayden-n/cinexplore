@@ -81,7 +81,7 @@ const Header = () => {
       <ContentWrapper>
         <div className="logo">
           <Link to="/" style={{ textDecoration: 'none' }}>
-            <p>StreamFlix</p>
+            <p>Streamflix</p>
           </Link>
         </div>
         <ul className="menuItems">
